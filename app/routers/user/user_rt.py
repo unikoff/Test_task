@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
@@ -11,7 +12,7 @@ from functools import wraps
 from app.DBpackage.database import SessionLocal
 from . import schemas, crud
 
-SECRET_KEY = "unik" # естественно по правилам он должен быть в .env
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_EXPIRE_MINUTES = 30
 REFRESH_EXPIRE_MINUTES = 1440

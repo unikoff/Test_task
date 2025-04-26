@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from app.DBpackage import models
 
 def create_task(db: Session, task_data: dict, user_id: int):
-    db_task = models.Task(**task_data, user_id=user_id)  # Добавляем user_id
+    db_task = models.Task(**task_data, user_id=user_id)
     db.add(db_task)
     db.commit()
     db.refresh(db_task)
@@ -18,7 +18,6 @@ def update_task(db: Session, task_id: int, update_data: dict, user_id: int):
     if not db_task:
         return None
     
-    # Обновляем только переданные поля
     update_data = {k: v for k, v in update_data.items() if v is not None}
     
     for key, value in update_data.items():
